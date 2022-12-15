@@ -9,3 +9,9 @@
   <%= file_field_tag :file %>
   <%= submit_tag 'Import CSV' %>
 <% end %>
+
+<ul>
+  <% current_user.calendars.last.specs.each do |spec| %>
+    <li><%= spec.join(" ") %></li>
+  <% end %>
+</ul>
