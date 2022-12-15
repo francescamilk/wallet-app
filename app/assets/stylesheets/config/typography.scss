@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
+
+$header-font: 'Limelight', cursive;
+$body-font: 'Poppins', sans-serif;
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: $body-font;
+  font-size: 1.6rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $header-font;
+}
+
+a, a:hover {
+  text-decoration: none;
+}
