@@ -24,8 +24,9 @@ class Calendar < ApplicationRecord
     self.update(specs: specs)
   end
 
-  def total_income
-    teacher_count * 300 + ta_count * 100
+  def total_income(manager = false, tot = 0)
+    tot += 2400 if manager
+    tot += teacher_count * 300 + ta_count * 100
   end
 
   def income_per_month(manager = false)
