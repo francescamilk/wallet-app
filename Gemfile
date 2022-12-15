@@ -73,3 +73,4 @@ end
 
 # Authentication & Security
 gem "devise"
+gem "pundit"
