@@ -13,13 +13,13 @@ class Calendar < ApplicationRecord
       next unless is_ta || is_teacher
 
       spec = {
-        day: row["Day"].to_date
+        "day" => row["Day"]
       }
 
-      spec[:teacher] = row["TA(Lecturer)"] if is_teacher
-      spec[:ta]      = row["TA"] if is_ta
+      spec["teacher"] = row["TA(Lecturer)"] if is_teacher
+      spec["ta"]      = row["TA"] if is_ta
 
-      specs << spec 
+      specs << spec
     end
 
     self.update(specs: specs)
@@ -29,13 +29,56 @@ class Calendar < ApplicationRecord
     teacher_count * 300 + ta_count * 100
   end
 
+  def income_per_month
+    teach_data = days_per_months("teacher")
+    ta_data    = days_per_months("ta")
+
+    teach_income = teach_data.map { |mo, days| days * 300 }
+    ta_income    = teach_data.map { |mo, days| days * 100 }
+
+    i = 0
+    months_income = {}
+    teach_data.each do |month, co|
+      months_income[month] = teach_income[i] + ta_income[i]
+      i += 1
+    end
+
+    months_income
+  end
+
   private
 
   def teacher_count
-    self.specs.select { |spec| spec.include?("teacher") }.count
+    self.specs.select { |spec| spec.key?("teacher") }.count
   end
 
   def ta_count
-    self.specs.select { |spec| spec.include?("ta") }.count
+    self.specs.select { |spec| spec.key?("ta") }.count
+  end
+
+  def split_months
+    months = self.specs.map { |hash| hash["day"].match(/-(?<m>\d+)-/)[:m].to_i }.uniq
+    months_data = {}
+
+    months.count.times do |i|
+      month = Date::MONTHNAMES[months[i]]
+      months_data[month] = specs.group_by do |hash|
+        hash["day"].include?("-#{months[i]}-") 
+      end[true]
+    end
+
+    months_data
+  end
+
+  def days_per_months(role)
+    teacher_days = {}
+    split_months.each do |month, array|
+      count = array.count do |hash|
+        hash.key?(role)
+      end
+      
+      teacher_days[month] = count
+    end
+    teacher_days
   end
 end
