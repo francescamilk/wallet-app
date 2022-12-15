@@ -51,6 +51,7 @@ class Calendar < ApplicationRecord
   private
 
   def teacher_count
+    # Heroku
     self.specs.select { |spec| spec.key?("teacher") }.count
   end
 
@@ -59,6 +60,7 @@ class Calendar < ApplicationRecord
   end
 
   def split_months
+    # local
     months = self.specs.map { |hash| hash["day"].match(/-(?<m>\d+)-/)[:m].to_i }.uniq
     months_data = {}
 
