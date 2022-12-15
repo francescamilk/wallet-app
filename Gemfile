@@ -77,6 +77,3 @@ gem "pundit"
 
 # Front-End
 gem "simple_form", github: "heartcombo/simple_form"
-
-# PWA
-gem "serviceworker-rails"
