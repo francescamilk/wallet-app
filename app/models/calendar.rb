@@ -34,7 +34,7 @@ class Calendar < ApplicationRecord
     ta_data    = days_per_months("ta")
 
     teach_income = teach_data.map { |mo, days| days * 300 }
-    ta_income    = teach_data.map { |mo, days| days * 100 }
+    ta_income    = ta_data.map { |mo, days| days * 100 }
 
     i = 0
     months_income = {}
