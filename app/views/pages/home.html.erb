@@ -10,8 +10,10 @@
   <%= submit_tag 'Import CSV' %>
 <% end %>
 
-<ul>
-  <% current_user.calendars.last.specs.each do |spec| %>
-    <li><%= spec  %></li>
-  <% end %>
-</ul>
+<% if current_user.calendars %>
+  <ul>
+    <% current_user.calendars.last.specs.each do |spec| %>
+      <li><%= spec  %></li>
+    <% end %>
+  </ul>
+<% end %>
