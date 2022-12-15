@@ -4,7 +4,6 @@ class Calendar < ApplicationRecord
 
   def import(file)
     specs = []
-
     CSV.foreach(file.path, headers: true) do |row|
       row["TA(Lecturer)"] = row["TA(Lecturer)"].match(/\w+\s\w+/).to_s
 
@@ -29,9 +28,9 @@ class Calendar < ApplicationRecord
     teacher_count * 300 + ta_count * 100
   end
 
-  def income_per_month
-    teach_data = days_per_months("teacher")
-    ta_data    = days_per_months("ta")
+  def income_per_month(manager = false)
+    teach_data = data_per_month("teacher")
+    ta_data    = data_per_month("ta")
 
     teach_income = teach_data.map { |mo, days| days * 300 }
     ta_income    = ta_data.map { |mo, days| days * 100 }
@@ -43,6 +42,8 @@ class Calendar < ApplicationRecord
       i += 1
     end
 
+    last_month = months_income.keys.last
+    months_income[last_month] += 2400 if manager
     months_income
   end
 
@@ -70,15 +71,15 @@ class Calendar < ApplicationRecord
     months_data
   end
 
-  def days_per_months(role)
+  def data_per_month(role)
     teacher_days = {}
     split_months.each do |month, array|
       count = array.count do |hash|
         hash.key?(role)
       end
-      
       teacher_days[month] = count
     end
+
     teacher_days
   end
 end
