@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users
   root 'pages#home'
+  
+  devise_for :users
+  resources  :calendars, only: :create do
+    collection do
+      post :import
+    end
+  end
 end

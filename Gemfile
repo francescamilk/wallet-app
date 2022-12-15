@@ -74,3 +74,6 @@ end
 # Authentication & Security
 gem "devise"
 gem "pundit"
+
+# Front-End
+gem "simple_form", github: "heartcombo/simple_form"

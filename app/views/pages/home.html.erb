@@ -1,1 +1,12 @@
 <h1>Hello <%= current_user.first_name %></h1>
+
+<%= simple_form_for @calendar do |f| %>
+  <%= f.input :name %>
+  <%= f.submit %>
+<% end %>
+
+
+<%= form_tag import_calendars_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag 'Import CSV' %>
+<% end %>
