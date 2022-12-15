@@ -24,4 +24,18 @@ class Calendar < ApplicationRecord
 
     self.update(specs: specs)
   end
+
+  def total_income
+    teacher_count * 300 + ta_count * 100
+  end
+
+  private
+
+  def teacher_count
+    self.specs.select { |spec| spec.include?("teacher") }.count
+  end
+
+  def ta_count
+    self.specs.select { |spec| spec.include?("ta") }.count
+  end
 end
