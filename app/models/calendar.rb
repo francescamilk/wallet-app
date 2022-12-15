@@ -3,6 +3,15 @@ class Calendar < ApplicationRecord
   belongs_to :user
 
   def import(file)
-    self.update(specs: { 'working': 'yes' })
+    specs = []
+
+    CSV.foreach(file.path, headers: true) do |row|
+      row = row.map do |dataset|
+        "#{dataset[0]} => #{dataset[1]}"
+      end
+      specs << row
+    end
+
+    self.update(specs: specs)
   end
 end

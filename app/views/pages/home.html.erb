@@ -5,7 +5,6 @@
   <%= f.submit %>
 <% end %>
 
-
 <%= form_tag import_calendars_path, multipart: true do %>
   <%= file_field_tag :file %>
   <%= submit_tag 'Import CSV' %>
