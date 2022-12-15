@@ -6,10 +6,20 @@ class Calendar < ApplicationRecord
     specs = []
 
     CSV.foreach(file.path, headers: true) do |row|
-      row = row.map do |dataset|
-        "#{dataset[0]} => #{dataset[1]}"
-      end
-      specs << row
+      row["TA(Lecturer)"] = row["TA(Lecturer)"].match(/\w+\s\w+/).to_s
+
+      is_teacher = row["TA(Lecturer)"] == self.user.full_name
+      is_ta      = row["TA"] == self.user.full_name
+      next unless is_ta || is_teacher
+
+      spec = {
+        day: row["Day"].to_date
+      }
+
+      spec[:teacher] = row["TA(Lecturer)"] if is_teacher
+      spec[:ta]      = row["TA"] if is_ta
+
+      specs << spec 
     end
 
     self.update(specs: specs)
