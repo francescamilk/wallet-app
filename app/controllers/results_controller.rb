@@ -16,11 +16,11 @@ class ResultsController < ApplicationController
     account_data = [{
       "metadata": account.get_metadata(),
       "balances": account.get_balances(),
-      "details": account.get_details(),
-      "transactions": account.get_transactions()
+      "details": account.get_details()
+      # "transactions": account.get_transactions()
       }]
       
-      # render :json => JSON.pretty_generate(JSON.parse(account_data.to_json))
-      @data = account_data.to_json
+    @balance = account_data[0][:balances]
+    # render :json => JSON.pretty_generate(JSON.parse(account_data.to_json))
     end
   end
