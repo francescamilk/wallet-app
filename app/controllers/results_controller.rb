@@ -20,6 +20,7 @@ class ResultsController < ApplicationController
       "transactions": account.get_transactions()
       }]
       
-      render :json => JSON.pretty_generate(JSON.parse(account_data.to_json))
+      # render :json => JSON.pretty_generate(JSON.parse(account_data.to_json))
+      @data = account_data.to_json
     end
   end
