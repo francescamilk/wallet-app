@@ -64,7 +64,6 @@ class Calendar < ApplicationRecord
     months_data = {}
 
     months.count.times do |i|
-      # month = Date::MONTHNAMES[months[i]]
       month = months[i]
       months_data[month] = specs.group_by do |hash|
         hash["day"].include?(months[i])
