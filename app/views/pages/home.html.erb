@@ -13,8 +13,8 @@
 <% unless current_user.calendars.empty? || current_user.calendars.last.specs.nil? || current_user.calendars.last.specs.empty? %>
   <h3>You will earn <%= current_user.calendars.last.total_income(manager = true) %>€</h3>
 
-  <ul>
   <h3><%= current_user.calendars.last.income_per_month(manager = true) %></h3>
+  <ul>
     <% current_user.calendars.last.specs.each do |spec| %>
       <li><%= spec %></li>
     <% end %>
