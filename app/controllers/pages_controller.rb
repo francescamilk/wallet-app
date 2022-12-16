@@ -1,5 +1,7 @@
 class PagesController < ApplicationController
-  def home
+  def home; end
+
+  def sync
     @calendar = Calendar.new
   end
 end
