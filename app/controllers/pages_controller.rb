@@ -1,3 +1,5 @@
+require "nordigen_ruby/api/institutions"
+
 class PagesController < ApplicationController
   def home
     client = Client.new().create_client()
