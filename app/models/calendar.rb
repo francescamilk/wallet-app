@@ -12,7 +12,7 @@ class Calendar < ApplicationRecord
       next unless is_ta || is_teacher
 
       spec = {
-        "day" => row["Day"]
+        "day": row["Day"]
       }
 
       spec["teacher"] = row["TA(Lecturer)"] if is_teacher
