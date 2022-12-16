@@ -10,7 +10,7 @@
   <%= submit_tag 'Import CSV' %>
 <% end %>
 
-<% unless current_user.calendars.empty? || current_user.calendars.last.specs.nil? %>
+<% unless current_user.calendars.empty? || current_user.calendars.last.specs.nil? || current_user.calendars.last.specs.empty? %>
   <h3>You will earn <%= current_user.calendars.last.total_income(manager = true) %>€</h3>
 
   <ul>
