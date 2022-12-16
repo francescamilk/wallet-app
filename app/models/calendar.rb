@@ -60,14 +60,14 @@ class Calendar < ApplicationRecord
   end
 
   def split_months
-    # local
-    months = self.specs.map { |hash| hash["day"].match(/-(?<m>\d+)-/)[:m].to_i }.uniq
+    months = self.specs.map { |hash| hash["day"].match(/,\s(?<m>\w{3})\s/)[:m] }.uniq
     months_data = {}
 
     months.count.times do |i|
-      month = Date::MONTHNAMES[months[i]]
+      # month = Date::MONTHNAMES[months[i]]
+      month = months[i]
       months_data[month] = specs.group_by do |hash|
-        hash["day"].include?("-#{months[i]}-") 
+        hash["day"].include?(months[i])
       end[true]
     end
 
