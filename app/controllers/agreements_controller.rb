@@ -10,7 +10,7 @@ class AgreementsController < ApplicationController
     
     client = Client.new().create_client()
     uuid = SecureRandom.uuid
-    redirect_url = "http://localhost:3000/results/"
+    redirect_url = results_path
     init = client.init_session(redirect_url: redirect_url, institution_id: id, reference_id: uuid)
     session[:requisition_id] = init["id"]
     redirect_to init["link"], allow_other_host: true
