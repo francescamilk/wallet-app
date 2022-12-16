@@ -1,5 +1,5 @@
 require 'nordigen-ruby'
-require 'dotenv/load'
+require 'dotenv/load' if Rails.env.development?
 
 class Client
   def create_client
