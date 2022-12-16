@@ -1,5 +1,4 @@
 require 'securerandom'
-require_relative "../services/client"
 
 class AgreementsController < ApplicationController
   def index
