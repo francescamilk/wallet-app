@@ -74,6 +74,10 @@ end
 # Authentication & Security
 gem "devise"
 gem "pundit"
+gem "dotenv-rails", groups: [:development, :test]
 
 # Front-End
 gem "simple_form", github: "heartcombo/simple_form"
+
+# Custom
+gem 'nordigen-ruby'
